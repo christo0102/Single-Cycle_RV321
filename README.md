@@ -69,17 +69,6 @@ This project is evolving! I am currently working on moving from a single-cycle d
 * **[Planned] Hazard Handling:** Adding Forwarding and Stalling logic to handle Data and Control hazards in the pipeline.
 * **Physical Implementation:** Running the design through **OpenLane** to target the Sky130 process node.
 
----
-
-### 🔧 Folder Structure
-
-```bash
-├── rtl/          # The "Brain" - All Verilog modules
-├── tb/           # Testbenches to prove it works
-├── docs/         # Block diagrams and instruction lists
-├── fpga/         # Constraints for hardware implementation
-└── README.md
-
 ```
 
 ### 🎓 Acknowledgments
@@ -87,5 +76,3 @@ This project is evolving! I am currently working on moving from a single-cycle d
 A huge thank you to **Sarah and David Harris** for their incredible textbook. It served as the roadmap for this implementation.
 
 ---
-
-**Would you like me to generate a "Supported Instructions" table to make that section look more organized?**
