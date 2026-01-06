@@ -27,6 +27,11 @@ The core handles the full 39-instruction suite of the RV32I specification:
 * **Flow Control:** `BEQ`, `BNE`, `BLT`, `BGE`, `JAL`, `JALR`
 * **Upper Immediates:** `LUI`, `AUIPC`
 
+> These are the supported instructions with address
+
+(![Block Diagram](Instruction_set.jpeg))
+
+
 ---
 
 ### 🧱 Architecture
