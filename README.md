@@ -69,10 +69,8 @@ This project is evolving! I am currently working on moving from a single-cycle d
 * **[Planned] Hazard Handling:** Adding Forwarding and Stalling logic to handle Data and Control hazards in the pipeline.
 * **Physical Implementation:** Running the design through **OpenLane** to target the Sky130 process node.
 
-```
-
-### 🎓 Acknowledgments
+> ACKNOWLEDGEMENT
 
 A huge thank you to **Sarah and David Harris** for their incredible textbook. It served as the roadmap for this implementation.
 
----
+
