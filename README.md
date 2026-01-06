@@ -36,7 +36,7 @@ Currently, the repository features the **Single-Cycle implementation**.
 > **Visualizing the Core:**
 > Below is the block diagram I used to map out the connections between the Program Counter, Memory, Register File, and ALU.
 
-![Block Diagram]("C:\Users\chris\Downloads\verilog and books\Risc V\code\Block Diagram\RV32I single Cycle Datapath.jpg")
+![Block Diagram](./RV32I_single_Cycle_Datapath.jpg)
 
 ### 🧪 Verification (How I know it works)
 
