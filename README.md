@@ -58,6 +58,12 @@ I believe hardware is only as good as its verification. I’ve used **Icarus Ver
 
 (![Block Diagram](fibonacci_results.png))
 
+ 
+
+> Video of FPGA Testing of Fibonacci series 
+
+Drive link : https://drive.google.com/drive/folders/1ptxFVm4Eos_x-h_8EqsXcriIdKmZnF0q?usp=sharing
+ 
 ---
 
 ###  What's Next? (The Roadmap)
