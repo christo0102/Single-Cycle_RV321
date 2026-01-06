@@ -50,6 +50,14 @@ I believe hardware is only as good as its verification. I’ve used **Icarus Ver
 * **Instruction-level testing:** Every instruction has been put through a testbench to ensure the Register File and Memory update correctly.
 * **Waveform Analysis:** Monitored the PC, ALU results, and Write-back stages to eliminate timing hazards.
 
+> Below is the waveform results captured from vivado 
+
+(![Block Diagram](Simulation.png))
+
+> Fibonacci series results
+
+(![Block Diagram](fibonacci_results.png))
+
 ---
 
 ###  What's Next? (The Roadmap)
