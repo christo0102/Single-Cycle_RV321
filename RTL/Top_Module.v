@@ -38,10 +38,12 @@ module RISC_V_Single_Cycle (
     // Data Memory Wires
     wire [31:0] Read_Data;       // Read Data from DMEM
     wire [31:0] load_data;       // load data from load unit to write in registers
+    wire [31:0] jalr_target;
 
     // Control Unit Inputs
     wire funct7b5 = instruction[30]; // MSB of funct7 for R-type/I-type (SRA/SUB)
-    
+    assign jalr_target = {ALU_Result[31:1], 1'b0};
+
     // ------------------------------------------------------------------
     // 2. Instantiation of Components
     // ------------------------------------------------------------------
@@ -68,7 +70,7 @@ module RISC_V_Single_Cycle (
     mux_pc mux_one (
         .pc_plus4(pc_plus4),
         .pc_target(pc_target),
-        .Result(ALU_Result),       
+        .jalr_target(jalr_target),       
         .PCSrc(PCSrc),
         .pc_next(pc_next)
     );
