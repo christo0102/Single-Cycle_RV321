@@ -1,5 +1,5 @@
 `timescale 1ns / 1ps
-
+  
 module RISC_V_Single_Cycle (
     input  clk,     // System Clock
     input  reset // System Reset
@@ -37,6 +37,7 @@ module RISC_V_Single_Cycle (
     wire LessThan;              
     // Data Memory Wires
     wire [31:0] Read_Data;       // Read Data from DMEM
+    wire [31:0] load_data;       // load data from load unit to write in registers
 
     // Control Unit Inputs
     wire funct7b5 = instruction[30]; // MSB of funct7 for R-type/I-type (SRA/SUB)
@@ -146,14 +147,24 @@ module RISC_V_Single_Cycle (
         .MemWrite(MemWrite),
         .ALU_Result(ALU_Result), // ALU output is the memory address
         .Write_Data(rd2),        // Store data is from RS2 (rd2)
+        .funct3(instruction[14:12]),
         .Read_Data(Read_Data)
     );
 
     mux_result mux_for_result (
         .ALUResult(ALU_Result),
-        .Read_Data(Read_Data),
+        .load_data(load_data),
         .pc_plus4(pc_plus4),
         .ResultSrc(ResultSrc),
         .Result(Result)
     );
+    
+    Load_Unit load_unit (
+    .Read_Data(Read_Data),
+    .ALU_Result(ALU_Result),
+    .funct3(instruction[14:12]),
+    .load_data(load_data)
+    
+    );
+     
 endmodule
