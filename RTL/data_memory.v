@@ -4,7 +4,7 @@ module Data_Memory #(parameter DEPTH = 256)(
     input  wire        clk,
     input  wire        MemWrite,
     input  wire [2:0]  funct3,
-    input  wire [31:0] ALU_Result,
+    input  wire [9:0] ALU_Result,
     input  wire [31:0] Write_Data,
     output wire [31:0] Read_Data
 );
