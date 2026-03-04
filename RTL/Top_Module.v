@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ps  
   
 module RISC_V_Single_Cycle (
     input  clk,     // System Clock
@@ -13,7 +13,6 @@ module RISC_V_Single_Cycle (
     wire [31:0] pc_next;         // Next PC Mux output
     
     // Control Wires (From Control Unit)
-    wire Branch;
     wire [1:0] ResultSrc;
     wire MemWrite;
     wire ALUSrcB;
@@ -77,7 +76,7 @@ module RISC_V_Single_Cycle (
     
     // 2.2 Instruction Memory
     Instruction_Memory imem (
-        .pc_out(pc_out),
+        .pc_out(pc_out[9:2]),
         .instruction(instruction)
     );
 
@@ -88,7 +87,6 @@ module RISC_V_Single_Cycle (
         .funct7b5(funct7b5),
         .zero(zero),
         .LessThan(LessThan),
-        .Branch(Branch),        // Unused in main_decoder but is an output
         .ResultSrc(ResultSrc),
         .MemWrite(MemWrite),
         .ALUSrcB(ALUSrcB),
@@ -114,7 +112,7 @@ module RISC_V_Single_Cycle (
 
     // 2.5 Immediate Generator
     Extend immediate_generator (
-        .instruction(instruction),
+        .instruction(instruction[31:7]),
         .ImmSrc(ImmSrc),
         .ImmExt(ImmExt)
     );
@@ -147,7 +145,7 @@ module RISC_V_Single_Cycle (
     Data_Memory dmem (
         .clk(clk),
         .MemWrite(MemWrite),
-        .ALU_Result(ALU_Result), // ALU output is the memory address
+        .ALU_Result(ALU_Result[9:0]), // ALU output is the memory address
         .Write_Data(rd2),        // Store data is from RS2 (rd2)
         .funct3(instruction[14:12]),
         .Read_Data(Read_Data)
@@ -163,10 +161,10 @@ module RISC_V_Single_Cycle (
     
     Load_Unit load_unit (
     .Read_Data(Read_Data),
-    .ALU_Result(ALU_Result),
+    .ALU_Result(ALU_Result[1:0]),
     .funct3(instruction[14:12]),
     .load_data(load_data)
     
     );
-     
+ 
 endmodule
