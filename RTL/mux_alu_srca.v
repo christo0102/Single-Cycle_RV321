@@ -6,5 +6,5 @@ input
 ALUSrcA, 
 output [31:0] A 
 ); 
-assign A = (ALUSrcA) ? pc_out : rd1; 
+  assign A = (ALUSrcA) ? rd1 : pc_out; 
 endmodule
