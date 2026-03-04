@@ -6,7 +6,6 @@
  input  wire       funct7b5, 
  input  wire       zero, 
  // Outputs to other processor components 
- output wire       Branch, 
  output wire [1:0] ResultSrc, 
  output wire       MemWrite, 
  output wire       ALUSrcB, 
@@ -27,7 +26,6 @@
  .zero       (zero),
  .LessThan   (LessThan),
  .PCSrc      (PCSrc), 
- .Branch     (Branch), 
  .ResultSrc  (ResultSrc), 
  .MemWrite   (MemWrite), 
  .ALUSrcA     (ALUSrcA), 
@@ -54,7 +52,6 @@
  input  wire       zero,
  input  wire [2:0] funct3,
  output reg  [1:0] PCSrc, 
- output reg        Branch, 
  output reg  [1:0] ResultSrc, 
  output reg        MemWrite, 
  output reg        ALUSrcA, 
@@ -76,7 +73,6 @@ assign take_branch =  (
 );
  always @(*) begin 
  // Default values 
- Branch    = 1'b0; 
  ResultSrc = 2'b00; 
  MemWrite  = 1'b0; 
  ALUSrcA   = 1'b0; 
@@ -90,7 +86,6 @@ assign take_branch =  (
  RegWrite  = 1'b1; 
  ALUSrcB    = 1'b1; 
  ResultSrc = 2'b01; // Data from memory 
-
  end 
  7'b0100011: begin // sw, sb, sh 
  ImmSrc    = 3'b001; // S-type immediate 
@@ -105,9 +100,8 @@ assign take_branch =  (
  7'b1100011: begin // Branch-type 
  ImmSrc    = 3'b010; // B-type immediate 
  ALUOp     = 2'b01; 
- Branch    = 1'b1;
  ResultSrc = 2'b00; 
- PCSrc     = Branch & take_branch ? 2'b01 : 2'b00;
+ PCSrc     = take_branch ? 2'b01 : 2'b00;
  end 
  7'b0010011: begin // I-type (except for lw and jalr) 
  RegWrite  = 1'b1; 
@@ -138,8 +132,7 @@ assign take_branch =  (
  ALUSrcB    = 1'b1; 
  RegWrite  = 1'b1; 
  end 
- default: begin // Safe state for unsupported opcodes 
- Branch    = 1'b0; 
+ default: begin // Safe state for unsupported opcodes  
  PCSrc     = 2'b00; 
  ResultSrc = 2'b00; 
  MemWrite  = 1'b0; 
