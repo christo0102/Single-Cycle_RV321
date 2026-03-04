@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps  
+`timescale 1ns / 1ps      
  module Control_Unit ( 
  input  wire [6:0] opcode, 
  input  wire [2:0] funct3, 
@@ -72,10 +72,9 @@ assign take_branch =  (
     (funct3 == 3'b111 && ~LessThan)   // BGEU: take if not LessThan (unsigned)
 );
  always @(*) begin 
- // Default values 
  ResultSrc = 2'b00; 
  MemWrite  = 1'b0; 
- ALUSrcA   = 1'b0; 
+ ALUSrcA   = 1'b1; 
  ALUSrcB   = 1'b0; 
  PCSrc     = 2'b00; 
  ImmSrc    = 3'b000; 
@@ -84,11 +83,18 @@ assign take_branch =  (
  case (opcode) 
  7'b0000011: begin // I-type: lw (except for jalr and addi,andi etc) 
  RegWrite  = 1'b1; 
- ALUSrcB    = 1'b1; 
+ ALUSrcA    = 1'b1; 
+ ALUSrcB = 1'b1;
+ PCSrc   = 2'b00;
+ ImmSrc     = 3'b000;
+ ALUOp   = 2'b00;
  ResultSrc = 2'b01; // Data from memory 
  end 
  7'b0100011: begin // sw, sb, sh 
  ImmSrc    = 3'b001; // S-type immediate 
+ ALUSrcA = 1'b1;
+ PCSrc   = 2'b00;
+ ALUOp = 2'b00;
  ALUSrcB   = 1'b1; 
  ResultSrc = 2'b00; 
  MemWrite  = 1'b1;
@@ -96,16 +102,26 @@ assign take_branch =  (
  7'b0110011: begin // R-type 
  RegWrite  = 1'b1; 
  ALUOp     = 2'b10; 
+ ALUSrcA = 1'b1;
+ ALUSrcB  = 1'b0;
+ ResultSrc = 2'b00;
+ PCSrc    = 2'b00;
+ 
  end 
  7'b1100011: begin // Branch-type 
  ImmSrc    = 3'b010; // B-type immediate 
  ALUOp     = 2'b01; 
+ ALUSrcA = 1'b1;
+ ALUSrcB = 1'b0;
  ResultSrc = 2'b00; 
  PCSrc     = take_branch ? 2'b01 : 2'b00;
  end 
  7'b0010011: begin // I-type (except for lw and jalr) 
  RegWrite  = 1'b1; 
  ALUOp     = 2'b10; 
+ ImmSrc  = 3'b000;
+ ALUSrcA = 1'b1;
+ ResultSrc = 2'b00;
  ALUSrcB    = 1'b1; 
  end 
  7'b1101111: begin //  JAL-type 
@@ -116,6 +132,8 @@ assign take_branch =  (
  end 
  7'b1100111: begin  //  JALR 
  PCSrc     = 2'b10; 
+ ALUSrcA   = 1'b1;
+ ImmSrc   = 3'b000;
  ALUSrcB    = 1'b1; 
  RegWrite  = 1'b1; 
  ResultSrc = 2'b10; 
@@ -125,11 +143,16 @@ assign take_branch =  (
  ALUSrcB    = 1'b1; 
  RegWrite  = 1'b1; 
  ALUOp     = 2'b11; 
+ ResultSrc  = 2'b00;
+ PCSrc     = 2'b00;
  end 
  7'b0010111: begin  // AUIPC  
  ImmSrc    = 3'b100; 
- ALUSrcA   = 1'b1; 
+ ALUSrcA   = 1'b0; 
  ALUSrcB    = 1'b1; 
+ ResultSrc = 2'b00;
+ ALUOp  = 2'b00;
+ PCSrc = 2'b00;
  RegWrite  = 1'b1; 
  end 
  default: begin // Safe state for unsupported opcodes  
