@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps  
 module Load_Unit (
     input  wire [31:0] Read_Data,
     input  wire [1:0]  ALU_Result,
