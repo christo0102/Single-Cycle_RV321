@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps  
 module mux_pc(
     input  [31:0] pc_plus4,
     input  [31:0] pc_target,
