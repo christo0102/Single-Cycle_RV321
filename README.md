@@ -29,7 +29,7 @@ The core handles the full 39-instruction suite of the RV32I specification:
 
 > These are the supported instructions with address
 
-(![Block Diagram](RISC_V_Singlecycle.jpg))
+(![Instruction Set](Instruction_set.jpeg))
 
 
 ---
