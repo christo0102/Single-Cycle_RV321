@@ -4,8 +4,6 @@
 
 Welcome! This project is a personal journey into the heart of computer architecture. I’ve built a fully synthesizable **32-bit RISC-V (RV32I)** processor core from the ground up using Verilog HDL.
 
-The design is heavily inspired by the architectural blueprints in **"Digital Design and Computer Architecture (RISC-V Edition)" by Sarah L. Harris and David Money Harris**. It isn't just a simulation—it's a synthesizable core ready for FPGAs or an ASIC flow like OpenLane.
-
 ---
 
 # Key Features
@@ -75,8 +73,6 @@ This project is evolving! I am currently working on moving from a single-cycle d
 * **[Planned] Hazard Handling:** Adding Forwarding and Stalling logic to handle Data and Control hazards in the pipeline.
 * **Physical Implementation:** Running the design through **OpenLane** to target the Sky130 process node.
 
-> ACKNOWLEDGEMENT
 
-A huge thank you to **Sarah and David Harris** for their incredible textbook. It served as the roadmap for this implementation.
 
 
